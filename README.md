@@ -1,19 +1,18 @@
-## Foundry
+# Mineable-404
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Mineable-404 is the worlds first POW mineable ERC404 token.
 
-Foundry consists of:
+Mined using PoW through a SmartContract
+* No pre-mine
+* No ICO
+* 21,000,000 tokens total (in homage to Bitcoin)
+* Difficulty target auto-adjusts with PoW hashrate
+* Rewards decrease as more tokens are minted
+* Compatible with all services that support ERC20 tokens
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
-## Documentation
+## Setup
 
-https://book.getfoundry.sh/
-
-## Usage
 
 ### Build
 
