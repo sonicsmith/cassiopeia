@@ -16,6 +16,7 @@ contract Mineable404 is Ownable, ERC404U16, _0xBitcoinToken {
     constructor(address initialOwner_) ERC404U16("Mineable404", "M404", 18) Ownable(initialOwner_) {
         tokensMinted = 0;
         rewardEra = 0;
+        // _totalMineable = 65_535 * 10 ** 18; // (2 ** 16) - 1 tokens can ever be mined
         maxSupplyForEra = _totalMineable / 2;
         miningTarget = _MAXIMUM_TARGET;
         latestDifficultyPeriodStarted = block.number;
@@ -34,21 +35,21 @@ contract Mineable404 is Ownable, ERC404U16, _0xBitcoinToken {
         _setERC721TransferExempt(account_, value_);
     }
 
-    function mint(uint256 nonce, bytes32 challenge_digest) public override returns (bool success) {
+    function mint(uint256 nonce, bytes32 challengeDigest) public override returns (bool success) {
         // the PoW must contain work that includes a recent ethereum block hash (challenge number)
         // and the msg.sender's address to prevent MITM attacks
         bytes32 digest = keccak256(abi.encode(challengeNumber, msg.sender, nonce));
 
         //the challenge digest must match the expected
-        if (digest != challenge_digest) revert();
+        if (digest != challengeDigest) revert("Challenge digest mismatch");
 
         //the digest must be smaller than the target
-        if (uint256(digest) > miningTarget) revert();
+        if (uint256(digest) > miningTarget) revert("Digest too large");
 
         //only allow one reward for each challenge
         bytes32 solution = solutionForChallenge[challengeNumber];
         solutionForChallenge[challengeNumber] = digest;
-        if (solution != 0x0) revert(); //prevent the same answer from awarding twice
+        if (solution != 0x0) revert("Solution already used");
 
         uint256 rewardAmount = getMiningReward();
 
