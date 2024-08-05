@@ -151,7 +151,11 @@ abstract contract _0xBitcoinToken is IERC918 {
     }
 
     //help debug mining software
-    function getMintDigest(uint256 nonce, bytes32, bytes32 challenge_number) public view returns (bytes32) {
+    function getMintDigest(
+        uint256 nonce, 
+        bytes32, 
+        bytes32 challenge_number
+    ) public view returns (bytes32) {
         return keccak256(abi.encode(challenge_number, msg.sender, nonce));
     }
 

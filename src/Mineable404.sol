@@ -20,7 +20,6 @@ contract Mineable404 is Ownable, ERC404U16, _0xBitcoinToken {
 
     constructor(address initialOwner_) ERC404U16("Mineable404", "M404", 18) Ownable(initialOwner_) {
         tokensMinted = 0;
-        rewardEra = 0;
         // (2 ** 16) - 1 = Max tokens can ever be mined
         _totalMineable = 65_535 * 10 ** 18;
         miningTarget = _MAXIMUM_TARGET;

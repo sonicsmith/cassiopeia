@@ -1,0 +1,11 @@
+{
+  "name": "mineable-404",
+  "version": "0.1.0",
+  "description": "Mineable-404 is the worlds first POW mineable ERC404 token.",
+  "scripts": {
+    "deploy:local": "forge script script/Mineable404.s.sol:Mineable404Script --rpc-url http://127.0.0.1:8545 --broadcast",
+    "test": "forge test"
+  },
+  "author": "",
+  "license": "ISC"
+}
