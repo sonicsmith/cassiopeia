@@ -13,11 +13,16 @@ import {_0xBitcoinToken} from "./abstracts/_0xBitcoinToken.sol";
 contract Mineable404 is Ownable, ERC404U16, _0xBitcoinToken {
     string private _baseUri = "";
 
+    error ChallengeDigestMismatch();
+    error DigestTooLarge();
+    error SolutionAlreadyUsed();
+    error BlockAlreadyMined();
+
     constructor(address initialOwner_) ERC404U16("Mineable404", "M404", 18) Ownable(initialOwner_) {
         tokensMinted = 0;
         rewardEra = 0;
-        // _totalMineable = 65_535 * 10 ** 18; // (2 ** 16) - 1 tokens can ever be mined
-        maxSupplyForEra = _totalMineable / 2;
+        // (2 ** 16) - 1 = Max tokens can ever be mined
+        _totalMineable = 65_535 * 10 ** 18;
         miningTarget = _MAXIMUM_TARGET;
         latestDifficultyPeriodStarted = block.number;
         _startNewMiningEpoch();
@@ -40,16 +45,28 @@ contract Mineable404 is Ownable, ERC404U16, _0xBitcoinToken {
         // and the msg.sender's address to prevent MITM attacks
         bytes32 digest = keccak256(abi.encode(challengeNumber, msg.sender, nonce));
 
-        //the challenge digest must match the expected
-        if (digest != challengeDigest) revert("Challenge digest mismatch");
+        // Challenge digest must match the expected
+        if (digest != challengeDigest) {
+            revert ChallengeDigestMismatch();
+        }
 
-        //the digest must be smaller than the target
-        if (uint256(digest) > miningTarget) revert("Digest too large");
+        // Digest must be smaller than the target
+        if (uint256(digest) > miningTarget) {
+            revert DigestTooLarge();
+        }
 
-        //only allow one reward for each challenge
+        // Solution can only be used once
         bytes32 solution = solutionForChallenge[challengeNumber];
         solutionForChallenge[challengeNumber] = digest;
-        if (solution != 0x0) revert("Solution already used");
+        if (solution != 0x0) {
+            revert SolutionAlreadyUsed();
+        }
+
+        // One mined block per Ethereum block
+        if (lastRewardEthBlockNumber == block.number) {
+            revert BlockAlreadyMined();
+        }
+        lastRewardEthBlockNumber = block.number;
 
         uint256 rewardAmount = getMiningReward();
 
@@ -58,7 +75,7 @@ contract Mineable404 is Ownable, ERC404U16, _0xBitcoinToken {
         tokensMinted = tokensMinted + rewardAmount;
 
         //Cannot mint more tokens than there are
-        assert(tokensMinted <= maxSupplyForEra);
+        assert(tokensMinted <= _totalMineable);
 
         //set readonly diagnostics data
         lastRewardTo = msg.sender;

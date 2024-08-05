@@ -58,16 +58,14 @@ abstract contract _0xBitcoinToken is IERC918 {
 
     uint256 public miningTarget;
 
-    bytes32 public challengeNumber; //generate a new one when a new reward is minted
-
-    uint256 public rewardEra;
-    uint256 public maxSupplyForEra;
+    //generate a new one when a new reward is minted
+    bytes32 public challengeNumber;
 
     address public lastRewardTo;
     uint256 public lastRewardAmount;
     uint256 public lastRewardEthBlockNumber;
 
-    uint256 _totalMineable = 65_535 * 10 ** 18; // (2 ** 16) - 1 tokens can ever be mined
+    uint256 _totalMineable;
 
     mapping(bytes32 => bytes32) solutionForChallenge;
 
@@ -77,25 +75,17 @@ abstract contract _0xBitcoinToken is IERC918 {
 
     mapping(address => mapping(address => uint256)) allowed;
 
-    function mint(uint256 nonce, bytes32 challenge_digest) public virtual returns (bool success);
+    function mint(uint256 nonce, bytes32 challengeDigest) public virtual returns (bool success);
 
-    //a new 'block' to be mined
+    // A new 'block' to be mined
     function _startNewMiningEpoch() internal {
-        //if max supply for the era will be exceeded next reward round then enter the new era before that happens
-        //40 is the final reward era, almost all tokens minted
-        //once the final era is reached, more tokens will not be given out because the assert function
-        if (tokensMinted.add(getMiningReward()) > maxSupplyForEra && rewardEra < 39) {
-            rewardEra = rewardEra + 1;
-        }
-        //set the next minted supply at which the era will change
-        maxSupplyForEra = _totalMineable - _totalMineable.div(2 ** (rewardEra + 1));
-
-        epochCount = epochCount.add(1);
+        epochCount++;
         //every so often, readjust difficulty. Dont readjust when deploying
         if (epochCount % _BLOCKS_PER_READJUSTMENT == 0) {
             _reAdjustDifficulty();
         }
-        //make the latest ethereum block hash a part of the next challenge for PoW to prevent pre-mining future blocks
+        //make the latest ethereum block hash a part of the next challenge for PoW
+        // to prevent pre-mining future blocks
         //do this last since this is a protection mechanism in the mint() function
         challengeNumber = blockhash(block.number - 1);
     }
@@ -107,9 +97,11 @@ abstract contract _0xBitcoinToken is IERC918 {
         uint256 blocksSinceLastDifficulty = block.number - latestDifficultyPeriodStarted;
         //assume 360 ethereum blocks per hour
 
-        //we want miners to spend 10 minutes to mine each 'block', about 60 ethereum blocks = one 0xbitcoin epoch
+        //we want miners to spend 10 minutes to mine each 'block', about 60 ethereum
+        // blocks = one 0xbitcoin epoch
         uint256 epochsMined = _BLOCKS_PER_READJUSTMENT; //256
-        uint256 targetEthBlocksPerDiffPeriod = epochsMined * 60; //should be 60 times slower than ethereum
+        //should be 60 times slower than ethereum
+        uint256 targetEthBlocksPerDiffPeriod = epochsMined * 60;
 
         //if there were less eth blocks passed in time than expected
         if (blocksSinceLastDifficulty < targetEthBlocksPerDiffPeriod) {
@@ -126,14 +118,13 @@ abstract contract _0xBitcoinToken is IERC918 {
             //make it easier
             miningTarget = miningTarget.add(miningTarget.div(2000).mul(shortage_block_pct_extra)); //by up to 50 %
         }
-
         latestDifficultyPeriodStarted = block.number;
-        //very difficult
+
+        // Difficult
         if (miningTarget < _MINIMUM_TARGET) {
             miningTarget = _MINIMUM_TARGET;
         }
-        //very easy
-
+        // Easy
         if (miningTarget > _MAXIMUM_TARGET) {
             miningTarget = _MAXIMUM_TARGET;
         }
@@ -155,9 +146,6 @@ abstract contract _0xBitcoinToken is IERC918 {
 
     //reward begins at 50 and is cut in half every reward era (as tokens are mined)
     function getMiningReward() public pure returns (uint256) {
-        //once we get half way thru the coins, only get 25 per block
-        //every reward era, the reward amount halves.
-        // return (50 * 10 ** 1) / (2 ** rewardEra);
         // Hardcode 1 token every block
         return 1 * 10 ** 18;
     }
