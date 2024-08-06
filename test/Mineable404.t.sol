@@ -32,16 +32,15 @@ contract Mineable404Test is Test {
         assertEq(token.tokenURI(0), "https://example.com/");
     }
 
-    // function test_mint() public {
-    //     vm.warp(startTime + 10000 seconds);
+    function test_mint() public {
+        vm.warp(startTime + 10000 seconds);
 
-    //     bytes32 challengeNumber = token.getChallengeNumber();
+        vm.prank(miner);
+        // Use previously computed test hash
+        bool success = token.mint(362085, 0x000000fe3a664beb9a776998b1cb016fb94cae88a00468c908ae9898627d1d71);
 
-    //     vm.prank(miner);
-    //     bool success = token.mint(0, challengeNumber);
-
-    //     assertEq(success, true);
-    //     assertEq(token.totalSupply(), 1 * token.units());
-    //     assertEq(token.balanceOf(miner), 1 * token.units());
-    // }
+        assertEq(success, true);
+        assertEq(token.totalSupply(), 1 * token.units());
+        assertEq(token.balanceOf(miner), 1 * token.units());
+    }
 }
