@@ -95,13 +95,14 @@ abstract contract _0xBitcoinToken is IERC918 {
     //readjust the target by 5 percent
     function _reAdjustDifficulty() internal {
         uint256 blocksSinceLastDifficulty = block.number - latestDifficultyPeriodStarted;
-        //assume 360 ethereum blocks per hour
 
-        //we want miners to spend 10 minutes to mine each 'block', about 60 ethereum
         // blocks = one 0xbitcoin epoch
-        uint256 epochsMined = _BLOCKS_PER_READJUSTMENT; //256
-        //should be 60 times slower than ethereum
-        uint256 targetEthBlocksPerDiffPeriod = epochsMined * 60;
+        uint256 epochsMined = _BLOCKS_PER_READJUSTMENT;
+
+        // Our blocktime = 1800s (30min)
+        // Eth blocktime = 12s
+        // 1800 / 12 = 150 times slower than eth
+        uint256 targetEthBlocksPerDiffPeriod = epochsMined * 150;
 
         //if there were less eth blocks passed in time than expected
         if (blocksSinceLastDifficulty < targetEthBlocksPerDiffPeriod) {
@@ -151,11 +152,7 @@ abstract contract _0xBitcoinToken is IERC918 {
     }
 
     //help debug mining software
-    function getMintDigest(
-        uint256 nonce, 
-        bytes32, 
-        bytes32 challenge_number
-    ) public view returns (bytes32) {
+    function getMintDigest(uint256 nonce, bytes32, bytes32 challenge_number) public view returns (bytes32) {
         return keccak256(abi.encode(challenge_number, msg.sender, nonce));
     }
 
