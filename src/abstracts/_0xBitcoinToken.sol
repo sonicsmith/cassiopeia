@@ -77,16 +77,16 @@ abstract contract _0xBitcoinToken is IERC918 {
 
     function mint(uint256 nonce, bytes32 challengeDigest) public virtual returns (bool success);
 
-    // A new 'block' to be mined
+    // A new Orb to be mined
     function _startNewMiningEpoch() internal {
         epochCount++;
         //every so often, readjust difficulty. Dont readjust when deploying
         if (epochCount % _BLOCKS_PER_READJUSTMENT == 0) {
             _reAdjustDifficulty();
         }
-        //make the latest ethereum block hash a part of the next challenge for PoW
+        // make the latest ethereum block hash a part of the next challenge for PoW
         // to prevent pre-mining future blocks
-        //do this last since this is a protection mechanism in the mint() function
+        // do this last since this is a protection mechanism in the mint() function
         challengeNumber = blockhash(block.number - 1);
     }
 
@@ -99,7 +99,7 @@ abstract contract _0xBitcoinToken is IERC918 {
         // blocks = one 0xbitcoin epoch
         uint256 epochsMined = _BLOCKS_PER_READJUSTMENT;
 
-        // Our blocktime = 1800s (30min)
+        // Orb blocktime = 1800s (30min)
         // Eth blocktime = 12s
         // 1800 / 12 = 150 times slower than eth
         uint256 targetEthBlocksPerDiffPeriod = epochsMined * 150;

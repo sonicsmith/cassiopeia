@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 import {Test, console} from "forge-std/Test.sol";
-import {Mineable404} from "../src/Mineable404.sol";
+import {MinedOrbs} from "../src/MinedOrbs.sol";
 
-contract Mineable404Test is Test {
-    Mineable404 public token;
+contract MinedOrbsTest is Test {
+    MinedOrbs public token;
 
     uint256 startTime;
 
@@ -13,23 +13,24 @@ contract Mineable404Test is Test {
     address miner = address(2);
 
     function setUp() public {
-        token = new Mineable404(owner);
+        token = new MinedOrbs(owner);
         startTime = block.timestamp;
     }
 
     function test_deployment() public view {
-        assertEq(token.name(), "Mineable404");
-        assertEq(token.symbol(), "M404");
+        assertEq(token.name(), "Mined Orbs");
+        assertEq(token.symbol(), "ORB");
         assertEq(token.decimals(), 18);
         assertEq(token.owner(), owner);
         assertEq(token.totalSupply(), 0);
         assertEq(token.balanceOf(owner), 0);
+        assertEq(token.tokenURI(0), "ipfs://");
     }
 
     function test_setBaseURI() public {
         vm.prank(owner);
-        token.setBaseURI("https://example.com/");
-        assertEq(token.tokenURI(0), "https://example.com/");
+        token.setBaseURI("theBaseUri");
+        assertEq(token.tokenURI(0), "theBaseUri");
     }
 
     function test_mint() public {

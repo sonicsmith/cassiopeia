@@ -5,20 +5,21 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {ERC404U16} from "erc404/ERC404U16.sol";
 import {_0xBitcoinToken} from "./abstracts/_0xBitcoinToken.sol";
+import {IERC4906} from "./interfaces/IERC4906.sol";
 
 /**
- * @title Mineable404
- * @notice Mineable404 blah blah
+ * @title Mined Orbs
+ * @notice The worlds first mineable ERC404 tokens
  */
-contract Mineable404 is Ownable, ERC404U16, _0xBitcoinToken {
-    string private _baseUri = "";
+contract MinedOrbs is Ownable, ERC404U16, _0xBitcoinToken, IERC4906 {
+    string private _baseUri = "ipfs://";
 
     error ChallengeDigestMismatch();
     error DigestTooLarge();
     error SolutionAlreadyUsed();
     error BlockAlreadyMined();
 
-    constructor(address initialOwner_) ERC404U16("Mineable404", "M404", 18) Ownable(initialOwner_) {
+    constructor(address initialOwner_) ERC404U16("Mined Orbs", "ORB", 18) Ownable(initialOwner_) {
         tokensMinted = 0;
         // (2 ** 16) - 1 = Max tokens can ever be mined
         _totalMineable = 65_535 * 10 ** 18;
@@ -29,6 +30,7 @@ contract Mineable404 is Ownable, ERC404U16, _0xBitcoinToken {
 
     function setBaseURI(string memory baseUri_) external onlyOwner {
         _baseUri = baseUri_;
+        emit BatchMetadataUpdate(1, _totalMineable);
     }
 
     function tokenURI(uint256) public view override returns (string memory) {
@@ -40,7 +42,7 @@ contract Mineable404 is Ownable, ERC404U16, _0xBitcoinToken {
     }
 
     function mint(uint256 nonce, bytes32 challengeDigest) public override returns (bool success) {
-        // the PoW must contain work that includes a recent ethereum block hash (challenge number)
+        // The PoW must contain work that includes a recent ethereum block hash (challenge number)
         // and the msg.sender's address to prevent MITM attacks
         bytes32 digest = keccak256(abi.encode(challengeNumber, msg.sender, nonce));
 
@@ -73,10 +75,10 @@ contract Mineable404 is Ownable, ERC404U16, _0xBitcoinToken {
 
         tokensMinted = tokensMinted + rewardAmount;
 
-        //Cannot mint more tokens than there are
+        // Cannot mint more tokens than there are
         assert(tokensMinted <= _totalMineable);
 
-        //set readonly diagnostics data
+        // Set readonly diagnostics data
         lastRewardTo = msg.sender;
         lastRewardAmount = rewardAmount;
         lastRewardEthBlockNumber = block.number;

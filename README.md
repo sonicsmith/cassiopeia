@@ -1,6 +1,6 @@
-# Mineable-404
+# MinedOrbs
 
-Mineable-404 is the worlds first POW mineable ERC404 token.
+MinedOrbs are the worlds first POW mineable ERC404 tokens.
 
 Mined using PoW through a SmartContract
 
@@ -16,13 +16,13 @@ Mined using PoW through a SmartContract
 ### Build
 
 ```shell
-$ forge build
+$ npm run build
 ```
 
 ### Test
 
 ```shell
-$ forge test
+$ npm run test
 ```
 
 ### Format
@@ -46,7 +46,7 @@ $ anvil
 ### Deploy
 
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+$ npm run deploy:local
 ```
 
 ### Cast

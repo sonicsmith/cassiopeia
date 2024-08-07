@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 import {Script, console} from "forge-std/Script.sol";
-import {Mineable404} from "../src/Mineable404.sol";
+import {MinedOrbs} from "../src/MinedOrbs.sol";
 
-contract Mineable404Script is Script {
-    Mineable404 public token;
+contract MinedOrbsScript is Script {
+    MinedOrbs public token;
 
     function setUp() public {}
 
@@ -15,7 +15,7 @@ contract Mineable404Script is Script {
 
         vm.startBroadcast(privateKey);
 
-        token = new Mineable404(owner);
+        token = new MinedOrbs(owner);
 
         vm.stopBroadcast();
     }
