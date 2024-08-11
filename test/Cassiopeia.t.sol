@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 import {Test, console} from "forge-std/Test.sol";
-import {MinedOrbs} from "../src/MinedOrbs.sol";
+import {Cassiopeia} from "../src/Cassiopeia.sol";
 
-contract MinedOrbsTest is Test {
-    MinedOrbs public token;
+contract CassiopeiaTest is Test {
+    Cassiopeia public token;
 
     uint256 startTime;
 
@@ -13,13 +13,13 @@ contract MinedOrbsTest is Test {
     address miner = address(2);
 
     function setUp() public {
-        token = new MinedOrbs(owner);
+        token = new Cassiopeia(owner);
         startTime = block.timestamp;
     }
 
     function test_deployment() public view {
-        assertEq(token.name(), "Mined Orbs");
-        assertEq(token.symbol(), "ORB");
+        assertEq(token.name(), "Cassiopeia");
+        assertEq(token.symbol(), "PEIA");
         assertEq(token.decimals(), 18);
         assertEq(token.owner(), owner);
         assertEq(token.totalSupply(), 0);

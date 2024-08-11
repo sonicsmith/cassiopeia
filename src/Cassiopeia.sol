@@ -8,10 +8,10 @@ import {_0xBitcoinToken} from "./abstracts/_0xBitcoinToken.sol";
 import {IERC4906} from "./interfaces/IERC4906.sol";
 
 /**
- * @title Mined Orbs
- * @notice The worlds first mineable ERC404 tokens
+ * @title Cassiopeia
+ * @notice The worlds first mineable ERC404 token
  */
-contract MinedOrbs is Ownable, ERC404U16, _0xBitcoinToken, IERC4906 {
+contract Cassiopeia is Ownable, ERC404U16, _0xBitcoinToken, IERC4906 {
     string private _baseUri = "ipfs://";
 
     error ChallengeDigestMismatch();
@@ -19,7 +19,7 @@ contract MinedOrbs is Ownable, ERC404U16, _0xBitcoinToken, IERC4906 {
     error SolutionAlreadyUsed();
     error BlockAlreadyMined();
 
-    constructor(address initialOwner_) ERC404U16("Mined Orbs", "ORB", 18) Ownable(initialOwner_) {
+    constructor(address initialOwner_) ERC404U16("Cassiopeia", "PEIA", 18) Ownable(initialOwner_) {
         tokensMinted = 0;
         // (2 ** 16) - 1 = Max tokens can ever be mined
         _totalMineable = 65_535 * 10 ** 18;

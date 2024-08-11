@@ -1,9 +1,9 @@
 {
-  "name": "mined-orbs",
+  "name": "cassiopeia",
   "version": "0.1.0",
-  "description": "The worlds first POW mineable ERC404 tokens",
+  "description": "The worlds first POW mineable ERC404 token",
   "scripts": {
-    "deploy:local": "forge script script/MinedOrbs.s.sol:MinedOrbsScript --rpc-url http://127.0.0.1:8545 --broadcast",
+    "deploy:local": "forge script script/Cassiopeia.s.sol:CassiopeiaScript --rpc-url http://127.0.0.1:8545 --broadcast",
     "test": "forge test",
     "build": "forge build"
   },

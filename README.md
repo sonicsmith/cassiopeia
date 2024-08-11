@@ -1,6 +1,8 @@
-# MinedOrbs
+# Cassiopeia
 
-MinedOrbs are the worlds first POW mineable ERC404 tokens.
+Cassiopeia is the worlds first POW mineable ERC404 token.
+
+![image](/metadata/image.png)
 
 Mined using PoW through a SmartContract
 

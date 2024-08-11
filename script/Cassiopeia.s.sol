@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 import {Script, console} from "forge-std/Script.sol";
-import {MinedOrbs} from "../src/MinedOrbs.sol";
+import {Cassiopeia} from "../src/Cassiopeia.sol";
 
-contract MinedOrbsScript is Script {
-    MinedOrbs public token;
+contract CassiopeiaScript is Script {
+    Cassiopeia public token;
 
     function setUp() public {}
 
@@ -15,7 +15,7 @@ contract MinedOrbsScript is Script {
 
         vm.startBroadcast(privateKey);
 
-        token = new MinedOrbs(owner);
+        token = new Cassiopeia(owner);
 
         vm.stopBroadcast();
     }
