@@ -1,7 +1,7 @@
 {
   "description": "The worlds first POW mineable ERC404 token",
-  "external_url": "",
-  "animation_url": "ipfs://",
-  "image": "",
+  "external_url": "https://github.com/sonicsmith/cassiopeia",
+  "animation_url": "ipfs://Qmc6njQzW6mUMz5NimsVsU7aWDakpEm43waRJonpwbHdU7",
+  "image": "ipfs://QmYY4YwJ2rDfBGq1ie6od6ebFrX24657aKSnDxsGg3UjDA",
   "name": "Cassiopeia"
 }

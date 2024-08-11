@@ -7,6 +7,6 @@
     "test": "forge test",
     "build": "forge build"
   },
-  "author": "",
+  "author": "thesonicsmith@gmail.com",
   "license": "ISC"
 }

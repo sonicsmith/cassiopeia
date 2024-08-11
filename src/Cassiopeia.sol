@@ -12,7 +12,7 @@ import {IERC4906} from "./interfaces/IERC4906.sol";
  * @notice The worlds first mineable ERC404 token
  */
 contract Cassiopeia is Ownable, ERC404U16, _0xBitcoinToken, IERC4906 {
-    string private _baseUri = "ipfs://";
+    string private _baseUri = "ipfs://QmUiTFJQdm2RP84xKbfRgEMbvojCQakEjkSTPkrWx1iEoL";
 
     error ChallengeDigestMismatch();
     error DigestTooLarge();
