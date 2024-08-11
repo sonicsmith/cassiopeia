@@ -10,7 +10,7 @@ pragma solidity ^0.8.20;
  ██████ ██   ██ ███████ ███████ ██  ██████  ██      ███████ ██ ██   ██ 
                                                                        
                                                                        
-    The worlds first mineable ERC404 token.
+    The worlds first POW mineable ERC404 token.
 
     https://github.com/sonicsmith/cassiopeia
 
