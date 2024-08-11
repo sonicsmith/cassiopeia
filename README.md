@@ -6,12 +6,14 @@ Cassiopeia is the worlds first POW mineable ERC404 token.
 
 Mined using PoW through a SmartContract
 
+Deployed on Base to reduce gas costs
+
 - No pre-mine
 - No ICO
 - 65,535 tokens total
 - Difficulty target auto-adjusts with PoW hashrate
-- Rewards decrease as more tokens are minted
-- Compatible with all services that support ERC20 tokens
+- ERC20 Compatible
+- ERC721 Compatible
 
 ## Setup
 

@@ -7,5 +7,5 @@
     "editor.defaultFormatter": "JuanBlanco.solidity"
   },
   "solidity.formatter": "forge",
-  "cSpell.words": ["Cassiopeia", "hashrate"]
+  "cSpell.words": ["Cassiopeia", "hashrate", "sepolia"]
 }
