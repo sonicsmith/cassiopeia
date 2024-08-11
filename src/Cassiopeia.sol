@@ -3,14 +3,15 @@ pragma solidity ^0.8.20;
 
 /*
 
- ██████  █████  ███████ ███████ ██  ██████  ██████  ███████ ██  █████  
-██      ██   ██ ██      ██      ██ ██    ██ ██   ██ ██      ██ ██   ██ 
-██      ███████ ███████ ███████ ██ ██    ██ ██████  █████   ██ ███████ 
-██      ██   ██      ██      ██ ██ ██    ██ ██      ██      ██ ██   ██ 
- ██████ ██   ██ ███████ ███████ ██  ██████  ██      ███████ ██ ██   ██ 
-                                                                       
-                                                                       
+     ██████  █████  ███████ ███████ ██  ██████  ██████  ███████ ██  █████  
+    ██      ██   ██ ██      ██      ██ ██    ██ ██   ██ ██      ██ ██   ██ 
+    ██      ███████ ███████ ███████ ██ ██    ██ ██████  █████   ██ ███████ 
+    ██      ██   ██      ██      ██ ██ ██    ██ ██      ██      ██ ██   ██ 
+     ██████ ██   ██ ███████ ███████ ██  ██████  ██      ███████ ██ ██   ██ 
+                                                                        
+                                                                        
     The worlds first POW mineable ERC404 token.
+    Each successful mint will reward the miner with a pod.
 
     https://github.com/sonicsmith/cassiopeia
 
@@ -34,7 +35,7 @@ contract Cassiopeia is Ownable, ERC404U16, _0xBitcoinToken, IERC4906 {
     error SolutionAlreadyUsed();
     error BlockAlreadyMined();
 
-    constructor(address initialOwner_) ERC404U16("cTest", "cTest", 18) Ownable(initialOwner_) {
+    constructor(address initialOwner_) ERC404U16("Cassiopeia", "PEIA", 18) Ownable(initialOwner_) {
         tokensMinted = 0;
         // (2 ** 16) - 1 = Max tokens can ever be mined
         _totalMineable = 65_535 * 10 ** 18;

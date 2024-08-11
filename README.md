@@ -6,7 +6,9 @@ Cassiopeia is the worlds first POW mineable ERC404 token.
 
 Mined using PoW through a SmartContract
 
-Deployed on Base to reduce gas costs
+Deployed on Base to reduce gas costs.
+
+CA: [0xb17c8a3fad09c1ec2759b480349e48bfff37adb7](https://basescan.org/address/0xb17c8a3fad09c1ec2759b480349e48bfff37adb7)
 
 - No pre-mine
 - No ICO
@@ -29,40 +31,8 @@ $ npm run build
 $ npm run test
 ```
 
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
 ### Deploy
 
 ```shell
-$ npm run deploy:local
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+$ npm run deploy:[network]
 ```
