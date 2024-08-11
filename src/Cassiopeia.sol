@@ -1,6 +1,21 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/*
+
+ ██████  █████  ███████ ███████ ██  ██████  ██████  ███████ ██  █████  
+██      ██   ██ ██      ██      ██ ██    ██ ██   ██ ██      ██ ██   ██ 
+██      ███████ ███████ ███████ ██ ██    ██ ██████  █████   ██ ███████ 
+██      ██   ██      ██      ██ ██ ██    ██ ██      ██      ██ ██   ██ 
+ ██████ ██   ██ ███████ ███████ ██  ██████  ██      ███████ ██ ██   ██ 
+                                                                       
+                                                                       
+    The worlds first mineable ERC404 token.
+
+    https://github.com/sonicsmith/cassiopeia
+
+*/
+
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {ERC404U16} from "erc404/ERC404U16.sol";
@@ -19,7 +34,7 @@ contract Cassiopeia is Ownable, ERC404U16, _0xBitcoinToken, IERC4906 {
     error SolutionAlreadyUsed();
     error BlockAlreadyMined();
 
-    constructor(address initialOwner_) ERC404U16("Cassiopeia", "PEIA", 18) Ownable(initialOwner_) {
+    constructor(address initialOwner_) ERC404U16("cTest", "cTest", 18) Ownable(initialOwner_) {
         tokensMinted = 0;
         // (2 ** 16) - 1 = Max tokens can ever be mined
         _totalMineable = 65_535 * 10 ** 18;
