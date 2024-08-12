@@ -6,6 +6,7 @@
     "deploy:local": "forge script script/Cassiopeia.s.sol:CassiopeiaScript --rpc-url http://127.0.0.1:8545 --broadcast -vvvv",
     "deploy:testnet": "forge script script/Cassiopeia.s.sol:CassiopeiaScript --rpc-url sepolia --broadcast -vvvv",
     "deploy:base": "forge script script/Cassiopeia.s.sol:CassiopeiaScript --rpc-url base --broadcast --verify -vvvv",
+    "skip-lp-mint": "forge script script/Liquidity.s.sol:LiquidityScript --rpc-url base --broadcast -vvvv",
     "test": "forge test",
     "build": "forge build"
   },

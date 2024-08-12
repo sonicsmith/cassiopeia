@@ -6,6 +6,8 @@ Cassiopeia is the worlds first POW mineable ERC404 token.
 
 Mined using directly on chain through the token contract.
 
+Use this mining [example code](https://github.com/sonicsmith/cassiopeia-miner) to get started mining.
+
 This project uses code from PandoraERC404 and 0xBitcoin.
 
 It is compatible with the IERC918 mineable token interface.
