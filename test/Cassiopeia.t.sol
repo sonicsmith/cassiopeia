@@ -24,7 +24,7 @@ contract CassiopeiaTest is Test {
         assertEq(token.owner(), owner);
         assertEq(token.totalSupply(), 0);
         assertEq(token.balanceOf(owner), 0);
-        assertEq(token.tokenURI(0), "ipfs://");
+        assertEq(token.tokenURI(0), "ipfs://QmUiTFJQdm2RP84xKbfRgEMbvojCQakEjkSTPkrWx1iEoL");
     }
 
     function test_setBaseURI() public {
